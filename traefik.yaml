@@ -24,7 +24,7 @@ certificatesResolvers:
 http:
   routers:
     dashboard:
-      rule: Host(`caua-rinaldi.dev`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      rule: Host(`admin.caua-rinaldi.dev`)
       service: api@internal
       middlewares:
         - auth
