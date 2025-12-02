@@ -1,0 +1,24 @@
+api:
+  dashboard: true
+  insecure: true
+providers:
+  docker: {}
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+log:
+  level: DEBUG
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: cauarinaldi451@gmail.com
+      storage: /var/traefik/certs/cloudflare-acme.json
+      caServer: 'https://acme-v02.api.letsencrypt.org/directory'
+      keyType: EC256
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
