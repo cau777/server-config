@@ -28,10 +28,16 @@ services:
     image: cau777/sudoku-solver-server
     labels:
       - traefik.http.routers.sudoku-solver-https.rule=Host(`sudoku.caua-rinaldi.dev`)
+      - traefik.http.routers.sudoku-solver-https.tls=true
+      - traefik.http.routers.sudoku-solver-https.tls.certresolver=cloudflare
+      - traefik.http.routers.sudoku-solver-https.entrypoints=websecure
   regex-designer:
     image: cau777/regex-designer-server
     labels:
       - traefik.http.routers.regex-designer-https.rule=Host(`regex.caua-rinaldi.dev`)
+      - traefik.http.routers.regex-designer-https.tls=true
+      - traefik.http.routers.regex-designer-https.tls.certresolver=cloudflare
+      - traefik.http.routers.regex-designer-https.entrypoints=websecure
   trilium:
     image: triliumnext/notes
     restart: always
