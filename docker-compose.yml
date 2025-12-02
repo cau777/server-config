@@ -40,7 +40,7 @@ services:
     labels:
       - traefik.http.routers.trilium-http.rule=Host(`notes.caua-rinaldi.dev`)
       - traefik.http.routers.trilium-http.entrypoints=web
-      - traefik.http.routers.trilium-https.rule=Host(`demo.caua-rinaldi.dev`)
+      - traefik.http.routers.trilium-https.rule=Host(`notes.caua-rinaldi.dev`)
       - traefik.http.routers.trilium-https.tls=true
       - traefik.http.routers.trilium-https.tls.certresolver=cloudflare
       - traefik.http.routers.trilium-https.entrypoints=websecure
