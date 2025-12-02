@@ -38,6 +38,18 @@ services:
     environment:
       - TRILIUM_DATA_DIR=/home/node/trilium-data
     labels:
-      - traefik.http.routers.trilium-https.rule=Host(`notes.caua-rinaldi.dev`)
+      - traefik.http.routers.trilium-http.rule=Host(`notes.caua-rinaldi.dev`)
+      - traefik.http.routers.trilium-http.entrypoints=web
+      - traefik.http.routers.trilium-https.rule=Host(`demo.caua-rinaldi.dev`)
+      - traefik.http.routers.trilium-https.tls=true
+      - traefik.http.routers.trilium-https.tls.certresolver=cloudflare
+      - traefik.http.routers.trilium-https.entrypoints=websecure
     volumes:
       - ~/data:/home/node/trilium-data
+  demo:
+    image: nginx:latest
+    labels:
+      - traefik.http.routers.demo-https.rule=Host(`demo.caua-rinaldi.dev`)
+      - traefik.http.routers.demo-https.tls=true
+      - traefik.http.routers.demo-https.tls.certresolver=cloudflare
+      - traefik.http.routers.demo-https.entrypoints=websecure
