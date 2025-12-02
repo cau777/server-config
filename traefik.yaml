@@ -28,6 +28,11 @@ http:
       service: api@internal
       middlewares:
         - auth
+      tls:
+        certresolver: cloudflare
+      entrypoints:
+        - web
+        - websecure
   middlewares:
     auth:
       basicAuth:
