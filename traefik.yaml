@@ -1,6 +1,5 @@
 api:
   dashboard: true
-  insecure: true
 providers:
   docker: {}
 entryPoints:
@@ -22,3 +21,15 @@ certificatesResolvers:
         resolvers:
           - "1.1.1.1:53"
           - "8.8.8.8:53"
+http:
+  routers:
+    dashboard:
+      rule: Host(`caua-rinaldi.dev`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      service: api@internal
+      middlewares:
+        - auth
+  middlewares:
+    auth:
+      basicAuth:
+        users:
+          - "cau777:$apr1$RxsmiBqp$Pme/fcoxf5lei95vJ2bwL0"
