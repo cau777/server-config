@@ -11,6 +11,13 @@ services:
       - ./data/certs/:/var/traefik/certs/:rw
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.api-https.rule=Host(`admin.caua-rinaldi.dev`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      - traefik.http.routers.api-https.service=api@internal
+      - traefik.http.routers.api-https.entrypoints=websecure
+      - traefik.http.routers.api-https.tls=true
+      - traefik.http.routers.api-https.tls.certresolver=cloudflare
   dev-server:
     image: cau777/dev-profile-server
     labels:
