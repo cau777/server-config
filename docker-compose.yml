@@ -1,12 +1,6 @@
 services:
   traefik:
     image: traefik:v3.6
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--log.level=DEBUG"
     ports:
       - "80:80"
       - "443:443"
