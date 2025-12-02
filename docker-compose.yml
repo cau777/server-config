@@ -1,0 +1,37 @@
+# docker-compose.yml
+services:
+  traefik:
+    image: traefik:v3.6
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--log.level=DEBUG"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  dev-server:
+    image: cau777/dev-profile-server
+    labels:
+      - traefik.http.routers.dev-server.rule=Host(`caua-rinaldi.dev`)
+  sudoku-solver:
+    image: cau777/sudoku-solver-server
+    labels:
+      - traefik.http.routers.sudoku-solver.rule=Host(`sudoku.caua-rinaldi.dev`)
+  regex-designer:
+    image: cau777/regex-designer-server
+    labels:
+      - traefik.http.routers.regex-designer.rule=Host(`regex.caua-rinaldi.dev`)
+  trilium:
+    image: triliumnext/notes
+    restart: always
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    labels:
+      - traefik.http.routers.trilium.rule=Host(`notes.caua-rinaldi.dev`)
+    volumes:
+      - ~/data:/home/node/trilium-data
